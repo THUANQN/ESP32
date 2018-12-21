@@ -60,7 +60,7 @@ void loop() {
           if (currentLine.length() == 0) {
             // if the current line is blank, you got two newline characters in a row.
             // that's the end of the client HTTP request, so send a response:
-
+            if(header.indexOf("") >= 0) {
             // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
             // and a content-type so the client knows what's coming, then a blank line:
             client.println("HTTP/1.1 200 OK");
@@ -124,6 +124,13 @@ void loop() {
             client.println();
             // Break out of the while loop
             break;
+          } else {
+            client.println("HTTP/1.1 401 Unauthorized");
+client.println("WWW-Authenticate: Basic realm=\"Secure\"");
+client.println("Content-Type: text/html");
+client.println();
+client.println("<html>Authentication failed</html>");
+          }
           } else { // if you got a newline, then clear currentLine
             currentLine = "";
           }
@@ -132,7 +139,7 @@ void loop() {
         }
       }
     }
-    // If client don't connect
+    // If client doesn't connect
     header = ""; // Clear the header variable
     client.stop(); // Close the connection
     Serial.println("Client disconnected");
