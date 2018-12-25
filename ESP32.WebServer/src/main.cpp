@@ -61,7 +61,7 @@ void loop() {
                                                 // if the current line is blank, you got two newline characters in a row.
                                                 // that's the end of the client HTTP request, so send a response.
                                                 // checking if header is valid
-                                                // dXNlcjpwYXNz = 'user:pass' (user:pass) base64 encode
+                                                // YWRtaW46YWRtaW4= = 'admin:admin' (user:pass) base64 encode
                                                 // Finding the right credential string, then loads web page
                                                 if(header.indexOf("YWRtaW46YWRtaW4=") >= 0) {
                                                         // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
